@@ -99,3 +99,12 @@ button:hover{ background:rgba(255,255,255,0.02) }
 
 @keyframes slideUp{ to{ transform:translateY(0); opacity:1 } }
 @keyframes fadeIn{ to{ opacity:1 } }
+
+/* Setup screen styles */
+.setup-screen{ display:flex; align-items:center; justify-content:center; height:100% }
+.video-card{ display:flex; flex-direction:column; align-items:center; gap:12px }
+.video-wrap{ width:360px; height:220px; border-radius:14px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.04) }
+.video-wrap video{ width:100%; height:100%; object-fit:cover }
+.setup-msg{ color:rgba(230,238,248,0.9); margin:0 }
+.fallback-card{ padding:20px 24px; border-radius:12px; background:rgba(255,255,255,0.03); box-shadow:0 6px 18px rgba(0,0,0,0.6); color:var(--fg) }
+.checking{ color:rgba(230,238,248,0.8) }
