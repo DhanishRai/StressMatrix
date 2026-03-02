@@ -5,6 +5,7 @@ import Session from './screens/SessionScreen'
 import Ready from './screens/Ready'
 import { VideoProvider } from './context/VideoContext'
 import { AppProvider, useAppContext } from './context/AppContext'
+import Footer from './components/Footer'
 
 export default function App() {
   const cursorRef = useRef(null)
@@ -36,7 +37,7 @@ export default function App() {
       <main className="screens">
         <VideoProvider>
           <AppProvider>
-            <ScreenManager />
+            <AppContent cursorRef={cursorRef} />
           </AppProvider>
         </VideoProvider>
       </main>
@@ -46,8 +47,29 @@ export default function App() {
   )
 }
 
+function AppContent({ cursorRef }) {
+  return (
+    <>
+      <ScreenManager />
+      <Footer />
+    </>
+  )
+}
+
 function ScreenManager() {
-  const { screen } = useAppContext()
+  const { screen, zone } = useAppContext()
+
+  // Update theme-color based on zone
+  useEffect(() => {
+    const zoneColors = {
+      calm: '#22c55e',
+      mild: '#f59e0b',
+      stress: '#ef4444',
+    }
+    const color = zoneColors[zone] || '#050a0e'
+    const metaTheme = document.querySelector('meta[name="theme-color"]')
+    if (metaTheme) metaTheme.setAttribute('content', color)
+  }, [zone])
 
   return (
     <div className="screen-wrapper">

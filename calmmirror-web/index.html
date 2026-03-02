@@ -2,11 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050a0e" />
+    <meta name="description" content="CalmMirror: Calm before your interview." />
     <title>CalmMirror</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <style>
+      svg#grain-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    </style>
   </head>
   <body>
+    <svg id="grain-overlay" viewBox="0 0 1200 800" preserveAspectRatio="none">
+      <defs>
+        <filter id="grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" seed="42" />
+          <feColorMatrix in="noise" type="saturate" values="0" />
+        </filter>
+      </defs>
+      <rect width="1200" height="800" fill="rgba(255,255,255,0.03)" filter="url(#grain)" />
+    </svg>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
