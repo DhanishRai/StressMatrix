@@ -3,6 +3,7 @@ import { useVideo } from '../context/VideoContext'
 import useCalmnessScore from '../hooks/useCalmnessScore'
 import useTremorDetection from '../hooks/useTremorDetection'
 import FaceOverlay from '../components/FaceOverlay'
+import ReadyScreen from './ReadyScreen'
 
 const STEADINESS_THRESHOLD = 0.2
 const REQUIRED_STREAK_SECS = 3
@@ -10,7 +11,7 @@ const CALMNESS_BOOST = 10
 
 export default function SessionScreen({ setScreen }) {
   const { videoRef } = useVideo() || { videoRef: { current: null } }
-  const { calmnessScore, zone } = useCalmnessScore(videoRef)
+  const { calmnessScore, zone, readyTriggered } = useCalmnessScore(videoRef)
   const { tremorScore } = useTremorDetection()
 
   const [adjustedCalmness, setAdjustedCalmness] = useState(calmnessScore)
@@ -18,6 +19,18 @@ export default function SessionScreen({ setScreen }) {
   const [steadyStreak, setSteadyStreak] = useState(0)
   const [isGolden, setIsGolden] = useState(false)
   const [hasTouchDevice] = useState(typeof window !== 'undefined' && 'ontouchstart' in window)
+  const [showReady, setShowReady] = useState(false)
+
+  // Show ready screen when readyTriggered becomes true
+  useEffect(() => {
+    if (readyTriggered) {
+      setShowReady(true)
+    }
+  }, [readyTriggered])
+
+  const handleReadyDismiss = () => {
+    setShowReady(false)
+  }
 
   // Apply boost to calmness when displaying touch orb
   useEffect(() => {
@@ -106,6 +119,8 @@ export default function SessionScreen({ setScreen }) {
       )}
 
       <FaceOverlay videoRef={videoRef} />
+
+      {showReady && <ReadyScreen onDismiss={handleReadyDismiss} />}
     </div>
   )
 }
