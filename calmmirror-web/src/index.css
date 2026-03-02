@@ -1,0 +1,23 @@
+:root {
+  --bg: #f7fbff;
+  --text: #0f172a;
+}
+
+html,body,#root{
+  height:100%;
+  margin:0;
+}
+
+body{
+  font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.app{
+  text-align:center;
+  padding:2rem;
+}
