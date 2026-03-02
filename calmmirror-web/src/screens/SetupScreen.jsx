@@ -14,7 +14,7 @@ export default function SetupScreen() {
     let timer = null
     let stream = null
 
-n    async function startCamera() {
+    async function startCamera() {
       try {
         stream = await navigator.mediaDevices.getUserMedia({ video: true })
         if (!mounted) return
