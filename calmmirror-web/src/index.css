@@ -88,3 +88,14 @@ p{ margin:0 0 1rem 0; color:rgba(230,238,248,0.9) }
 /* basic button styles used in screens */
 button{ background:transparent; border:1px solid rgba(230,238,248,0.12); color:var(--fg); padding:8px 14px; border-radius:8px }
 button:hover{ background:rgba(255,255,255,0.02) }
+
+/* Landing screen styles and animations */
+.landing-screen{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px }
+.landing-heading{ font-family: 'DM Serif Display', serif; font-size:64px; font-style:italic; margin:0; transform:translateY(24px); opacity:0; animation:slideUp 700ms cubic-bezier(.2,.9,.2,1) forwards }
+.landing-sub{ margin:0; color:rgba(230,238,248,0.85) }
+.landing-button{ margin-top:8px; opacity:0; animation:fadeIn 600ms ease 600ms forwards }
+
+.grain{ position:absolute; inset:0; pointer-events:none; z-index:20; mix-blend-mode:overlay; opacity:0.06; background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px); background-size:3px 3px }
+
+@keyframes slideUp{ to{ transform:translateY(0); opacity:1 } }
+@keyframes fadeIn{ to{ opacity:1 } }

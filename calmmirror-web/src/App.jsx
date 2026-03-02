@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Landing from './screens/Landing'
+import Landing from './screens/LandingScreen'
 import Setup from './screens/Setup'
 import Session from './screens/Session'
 import Ready from './screens/Ready'
