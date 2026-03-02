@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useVideo } from '../context/VideoContext'
 import useCalmnessScore from '../hooks/useCalmnessScore'
 import useTremorDetection from '../hooks/useTremorDetection'
+import FaceOverlay from '../components/FaceOverlay'
 
 const STEADINESS_THRESHOLD = 0.2
 const REQUIRED_STREAK_SECS = 3
@@ -103,6 +104,8 @@ export default function SessionScreen({ setScreen }) {
           )}
         </div>
       )}
+
+      <FaceOverlay videoRef={videoRef} />
     </div>
   )
 }
