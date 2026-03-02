@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useVideo } from '../context/VideoContext'
+import { useAppContext } from '../context/AppContext'
 
-export default function SetupScreen({ setScreen }) {
+export default function SetupScreen() {
   const videoRef = useRef(null)
   const [available, setAvailable] = useState(null)
   const [message, setMessage] = useState('Checking camera...')
+  const { setScreen } = useAppContext()
   const { setVideoRef } = useVideo() || {}
 
   useEffect(() => {

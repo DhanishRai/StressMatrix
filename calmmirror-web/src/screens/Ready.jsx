@@ -1,6 +1,8 @@
 import React from 'react'
+import { useAppContext } from '../context/AppContext'
 
-export default function Ready({ setScreen }) {
+export default function Ready() {
+  const { setScreen } = useAppContext()
   return (
     <div style={{textAlign:'center'}}>
       <h2>Ready</h2>

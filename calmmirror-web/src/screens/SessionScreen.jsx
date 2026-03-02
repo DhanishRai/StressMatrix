@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useVideo } from '../context/VideoContext'
 import useCalmnessScore from '../hooks/useCalmnessScore'
 import useTremorDetection from '../hooks/useTremorDetection'
 import FaceOverlay from '../components/FaceOverlay'
 import ReadyScreen from './ReadyScreen'
+import { useAppContext } from '../context/AppContext'
 
 const STEADINESS_THRESHOLD = 0.2
 const REQUIRED_STREAK_SECS = 3
 const CALMNESS_BOOST = 10
 
-export default function SessionScreen({ setScreen }) {
-  const { videoRef } = useVideo() || { videoRef: { current: null } }
+export default function SessionScreen() {
+  const { videoRef } = useAppContext()
   const { calmnessScore, zone, readyTriggered } = useCalmnessScore(videoRef)
   const { tremorScore } = useTremorDetection()
 

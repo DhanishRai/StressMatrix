@@ -1,6 +1,9 @@
 import React from 'react'
+import { useAppContext } from '../context/AppContext'
 
-export default function LandingScreen({ setScreen }) {
+export default function LandingScreen() {
+  const { setScreen } = useAppContext()
+
   return (
     <div className="landing-screen">
       <h1 className="landing-heading">CalmMirror</h1>

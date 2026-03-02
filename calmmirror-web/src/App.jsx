@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Landing from './screens/LandingScreen'
 import Setup from './screens/SetupScreen'
 import Session from './screens/SessionScreen'
 import Ready from './screens/Ready'
 import { VideoProvider } from './context/VideoContext'
+import { AppProvider, useAppContext } from './context/AppContext'
 
 export default function App() {
   const cursorRef = useRef(null)
-  const [screen, setScreen] = useState('landing')
 
   useEffect(() => {
     const el = cursorRef.current
@@ -35,7 +35,9 @@ export default function App() {
 
       <main className="screens">
         <VideoProvider>
-          <ScreenManager screen={screen} setScreen={setScreen} />
+          <AppProvider>
+            <ScreenManager />
+          </AppProvider>
         </VideoProvider>
       </main>
 
@@ -44,24 +46,27 @@ export default function App() {
   )
 }
 
-function ScreenManager({ screen, setScreen }) {
+function ScreenManager() {
+  const { screen } = useAppContext()
+
   return (
     <div className="screen-wrapper">
       <div className={`screen ${screen === 'landing' ? 'visible' : 'hidden'}`}>
-        <Landing setScreen={setScreen} />
+        <Landing />
       </div>
 
       <div className={`screen ${screen === 'setup' ? 'visible' : 'hidden'}`}>
-        <Setup setScreen={setScreen} />
+        <Setup />
       </div>
 
       <div className={`screen ${screen === 'session' ? 'visible' : 'hidden'}`}>
-        <Session setScreen={setScreen} />
+        <Session />
       </div>
 
       <div className={`screen ${screen === 'ready' ? 'visible' : 'hidden'}`}>
-        <Ready setScreen={setScreen} />
+        <Ready />
       </div>
     </div>
   )
 }
+
