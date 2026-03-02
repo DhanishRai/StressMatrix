@@ -1,20 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useVideo } from '../context/VideoContext'
 
 export default function SetupScreen({ setScreen }) {
   const videoRef = useRef(null)
   const [available, setAvailable] = useState(null)
   const [message, setMessage] = useState('Checking camera...')
+  const { setVideoRef } = useVideo() || {}
 
   useEffect(() => {
     let mounted = true
     let timer = null
     let stream = null
 
-    async function startCamera() {
+n    async function startCamera() {
       try {
         stream = await navigator.mediaDevices.getUserMedia({ video: true })
         if (!mounted) return
-        if (videoRef.current) videoRef.current.srcObject = stream
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream
+          // expose the video element to the app via context for session processing
+          if (setVideoRef) setVideoRef(videoRef.current)
+        }
         setAvailable(true)
         setMessage('Looking good. Starting scan...')
         timer = setTimeout(() => setScreen('session'), 2000)
@@ -37,8 +43,10 @@ export default function SetupScreen({ setScreen }) {
         const s = videoRef.current.srcObject
         s.getTracks().forEach(t => t.stop())
       }
+      // clear context videoRef on unmount
+      if (setVideoRef) setVideoRef(null)
     }
-  }, [setScreen])
+  }, [setScreen, setVideoRef])
 
   return (
     <div className="setup-screen">

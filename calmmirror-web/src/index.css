@@ -108,3 +108,29 @@ button:hover{ background:rgba(255,255,255,0.02) }
 .setup-msg{ color:rgba(230,238,248,0.9); margin:0 }
 .fallback-card{ padding:20px 24px; border-radius:12px; background:rgba(255,255,255,0.03); box-shadow:0 6px 18px rgba(0,0,0,0.6); color:var(--fg) }
 .checking{ color:rgba(230,238,248,0.8) }
+
+/* Session screen */
+.session-screen{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; gap:24px; flex-direction:column; z-index:30 }
+.zone-blob{ position:absolute; inset:0; z-index:2; border-radius:50%; filter:blur(60px); opacity:0.28; transition:background 600ms ease }
+.zone-calm .zone-blob{ background: radial-gradient(circle at 50% 40%, rgba(34,197,94,0.95), transparent 40%) }
+.zone-mild .zone-blob{ background: radial-gradient(circle at 30% 40%, rgba(245,158,11,0.9), transparent 40%) }
+.zone-stress .zone-blob{ background: radial-gradient(circle at 60% 60%, rgba(239,68,68,0.9), transparent 40%) }
+
+.breathing-orb-wrap{ position:relative; z-index:10; display:flex; flex-direction:column; align-items:center }
+.breathing-orb{ width:220px; height:220px; border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); box-shadow:0 0 60px rgba(0,0,0,0.35); animation:breath 4s ease-in-out infinite alternate; transition:background 500ms ease, box-shadow 500ms ease }
+.zone-calm .breathing-orb{ background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.16), rgba(34,197,94,0.06)); box-shadow:0 0 60px rgba(34,197,94,0.12) }
+.zone-mild .breathing-orb{ background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.14), rgba(245,158,11,0.04)); box-shadow:0 0 60px rgba(245,158,11,0.12) }
+.zone-stress .breathing-orb{ background: radial-gradient(circle at 30% 30%, rgba(239,68,68,0.14), rgba(239,68,68,0.04)); box-shadow:0 0 60px rgba(239,68,68,0.12) }
+
+@keyframes breath{ from{ transform:scale(0.94) } to{ transform:scale(1.06) } }
+
+.breathing-text{ margin-top:18px; color:rgba(230,238,248,0.9); opacity:0; animation:fadeInOut 4s ease-in-out infinite alternate }
+@keyframes fadeInOut{ 0%{ opacity:0 } 25%{ opacity:1 } 75%{ opacity:1 } 100%{ opacity:0 } }
+
+.calmness-meter{ position:absolute; top:18px; right:18px; z-index:40; display:flex; flex-direction:column; align-items:center }
+.calmness-label{ margin-top:6px; color:var(--fg); font-weight:700 }
+
+.zone-calm .calmness-meter svg circle:nth-of-type(2){ stroke: var(--calm) }
+.zone-mild .calmness-meter svg circle:nth-of-type(2){ stroke: var(--mild) }
+.zone-stress .calmness-meter svg circle:nth-of-type(2){ stroke: var(--stress) }
+

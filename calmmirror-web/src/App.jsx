@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Landing from './screens/LandingScreen'
 import Setup from './screens/SetupScreen'
-import Session from './screens/Session'
+import Session from './screens/SessionScreen'
 import Ready from './screens/Ready'
+import { VideoProvider } from './context/VideoContext'
 
 export default function App() {
   const cursorRef = useRef(null)
@@ -33,7 +34,9 @@ export default function App() {
       </header>
 
       <main className="screens">
-        <ScreenManager screen={screen} setScreen={setScreen} />
+        <VideoProvider>
+          <ScreenManager screen={screen} setScreen={setScreen} />
+        </VideoProvider>
       </main>
 
       <div ref={cursorRef} className="cursor" aria-hidden />
